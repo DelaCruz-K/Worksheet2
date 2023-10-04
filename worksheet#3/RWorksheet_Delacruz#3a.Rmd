@@ -1,64 +1,96 @@
+---
+title: "RWorksheet_Delacruz#3a"
+output: pdf_document
+date: "2023-10-04"
+---
+
+
+```{r VECTORS}
 #1.
 Uppercase <- LETTERS
 Uppercase
 
 Lowercase <- letters
 Lowercase
+```
 
+```{r 1a}
 #1.a
 
 eleven <- Uppercase[1:11]
 eleven
+```
 
+```{r 1b}
 #1.b
 odd_letters <- Uppercase[seq(1, length(Uppercase), by = 2)]
 odd_letters
+```
 
+```{r 1c}
 #1.c
 
 vowels <- Uppercase[Uppercase %in% c("A", "E", "I", "O", "U")]
 vowels
+```
 
+```{r 1d}
 #1.d
 
 five_last <- tail(Lowercase,5)
 five_last
+```
 
+```{r 1e}
 #1.e
 
 fifteen_niyon <- Lowercase [15:24]
 fifteen_niyon
+```
 
 
+```{r 2la}
 #2.a
 City <- c("Tuguegarao City", "Manila", "Iloilo City", "Tacloban", "Samal Island",
           "Davao City")
 City
+```
 
+```{r 2lb}
 #2.b
 Temp <- c(42, 39, 34, 34, 30, 27)
 Temp
+```
 
+```{r 2lc}
 #2.c
 city_temp <- data.frame(City,Temp)
 city_temp
+```
 
+```{r 2ld}
 #2.d
 
 names(city_temp) <- c("City", "Temperature")
 names(city_temp) #[1] "City"        "Temperature"
+```
 
+```{r 2le}
 #2.e
 str(city_temp)
 #It shows the type which is 'data.frame', it tells us how many objects of 2 variables. 
 #They also state the type of variable if the list is char(string) and num(integer)
+```
 
+```{r 2lf}
 #2.f
 city_temp[3:4,]
 #         City Temperature
 #3 Iloilo City          34
 #4    Tacloban          34
+```
 
+```{r 2lg}
 #2.g 
 highest_temp <- max(city_temp$City)
 highest_temp
@@ -67,10 +99,11 @@ highest_temp
 lowest_temp <- min(city_temp$City)
 lowest_temp
 #Davao City
+```
 
 
-#MATRIX
 
+```{r 2ma}
 #2.a
 matrix1 <- matrix(c(1:8, 11:14), nrow=3, ncol=4)
 matrix1
@@ -78,7 +111,9 @@ matrix1
 #[1,]    1    4    7   12
 #[2,]    2    5    8   13
 #[3,]    3    6   11   14
+```
 
+```{r 2mb}
 #2.b
 
 matrix2 <- matrix1*2
@@ -87,25 +122,35 @@ matrix2
 #[1,]    2    8   14   24
 #[2,]    4   10   16   26
 #[3,]    6   12   22   28
+```
 
+```{r 2mc}
 #2.c
 matrix2[2,]
 #[1]  4 10 16 26
+```
 
+```{r 2md}
 #2.d
 son_of_matrix2 <-matrix2[1:2, 3:4]
 #     [,1] [,2]
 #[1,]   14   24
 #[2,]   16   26
+```
 
+```{r 2me}
 #2.e
 matrix2[3, 2:3]
 #[1] 12 22
+```
 
+```{r 2mf}
 #2.f
 matrix2[, 4]
 #[1] 24 26 28
+```
 
+```{r 2mg}
 #2.g
 rownames(matrix2) <- c("isa", "dalawa", "tatlo")
 colnames(matrix2) <- c("uno", "dos", "tres", "quatro")
@@ -113,7 +158,9 @@ colnames(matrix2) <- c("uno", "dos", "tres", "quatro")
 #isa      2   8   14     24
 #dalawa   4  10   16     26
 #tatlo    6  12   22     28
+``` 
 
+```{r 2mh}
 #2.h
 dim(matrix2) <- c(6,2)
 matrix2
@@ -124,11 +171,11 @@ matrix2
 #[4,]    8   24
 #[5,]   10   26
 #[6,]   12   28
+```
 
 
 
-#ARRAY
-
+```{r 3aa}
 #3.a
 num_value <- c(2, 3, 6, 7, 8, 9, 0, 3, 4, 5, 1)
 numArray <- array(data = rep(num_value, each = 2), dim=c(2,4,3))
@@ -150,11 +197,15 @@ numArray
 #[,1] [,2] [,3] [,4]
 #[1,]    4    5    1    2
 #[2,]    4    5    1    2
+```
 
+```{r 3ab}
 #3.b
 dim(numArray)
 #[1] 2 rows, 4 columns, 3 groups = 3 dimensions.
+```
 
+```{r 3ac}
 #3.c
 dimnames(numArray) <- list(Lowercase[1:2], Uppercase[1:4], c("1st-Dimensional Array", "2nd-Dimensional Array", "3rd-Dimensional Array"))
 numArray
@@ -175,4 +226,4 @@ numArray
 #A B C D
 #a 4 5 1 2
 #b 4 5 1 2
-      
+```
