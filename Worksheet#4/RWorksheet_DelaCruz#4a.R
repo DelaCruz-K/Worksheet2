@@ -48,5 +48,4 @@ excel_read <- read.table("import_march.csv")
 excel_read
 
 #6. FULL SEARCH
-exhaustive_search <-
-
+exhaustive_search
