@@ -16,7 +16,8 @@ mpg
 
 ```{r 1.b}
 #b. Which variables from mpg dataset are categorical?
-factor(mpg$manufacturer)
+manufactors <- factor(mpg$manufacturer)
+manufactors
 ```
 
 ```{r 1.c}
@@ -25,6 +26,22 @@ class(mpg$displ)
 ```
 
 ```{r 2.}
-max_manu <- max(mpg$manufacturer)
+max_manu <- table(mpg$manufacturer)
 max_manu
+
+models <- table(mpg$model)
+models
+
+max(models)
+
+#Dodge has the most models in this data set.
+#Caravan 2wd has the most variations.
+```
+
+```{r 2.a}
+
+```
+
+```{r 2.b}
+library(ggplot2)
 ```
