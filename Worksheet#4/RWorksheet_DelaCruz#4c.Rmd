@@ -1,0 +1,30 @@
+---
+title: "RWorksheet_DelaCruz#4c"
+author: "Kyla Ysabelle De la Cruz"
+date: "2023-11-21"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r 1.a}
+mpg <- read.csv("mpg.csv")
+mpg
+```
+
+```{r 1.b}
+#b. Which variables from mpg dataset are categorical?
+factor(mpg$manufacturer)
+```
+
+```{r 1.c}
+#b. Which are continuous variables?
+class(mpg$displ)
+```
+
+```{r 2.}
+max_manu <- max(mpg$manufacturer)
+max_manu
+```
