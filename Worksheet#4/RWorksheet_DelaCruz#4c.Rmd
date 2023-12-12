@@ -12,6 +12,9 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r 1.a}
 mpg <- read.csv("mpg.csv")
 mpg
+
+#Categorical data includes the manufacturer, model name, transmission, year, number of cylinders,type of drive train, fuel type and class
+#The continuous variables are engine displacement, city miles per gallon, highway miles per gallon
 ```
 
 ```{r 1.b}
@@ -25,23 +28,54 @@ manufactors
 class(mpg$displ)
 ```
 
-```{r 2.}
-max_manu <- table(mpg$manufacturer)
-max_manu
+```{r dplyr}
+library("dplyr")
 
-models <- table(mpg$model)
-models
+countMPG <- mpg %>%
+count(manufacturer,model)
 
-max(models)
-
-#Dodge has the most models in this data set.
-#Caravan 2wd has the most variations.
+countMPG
 ```
 
-```{r 2.a}
-
+```{r grouping unique models }
+uniqueMPG <- countMPG[c(3,6,10,12,16:22,24,26,27,29),1:3,]
+uniqueMPG
 ```
 
-```{r 2.b}
-library(ggplot2)
+```{r graph}
+
+barplot(uniqueMPG$n, main = "Unique Cars",
+        xlab = "Cars",
+        ylab = "Total Numbers",
+        names.arg = uniqueMPG$model,
+        cex.names = 0.35,
+        col = c("green","limegreen","darkgreen","black","chartreuse"))
+```
+
+```{r ggplot unique models}
+library("ggplot2")
+number <- uniqueMPG$n
+model <-  uniqueMPG$model
+ggplot(data = uniqueMPG, 
+       aes(x= model, y= number)) +
+       geom_bar(stat='identity',fill = rainbow(15),
+       col = "navy") +
+       scale_x_discrete(guide = guide_axis(angle = 40))
+```
+
+```{r MPG Plotting}
+ggplot(mpg, aes(model,manufacturer))+ geom_point() + scale_x_discrete(guide = guide_axis(angle = 60))
+# This plot is not as useful. In order to modify it we need to choose a graph that suits the data set.
+```
+```{r Plotting First 20 Observations}
+first20 <- mpg[1:20,1:11]
+first20
+first20_model <- first20$model
+first20_model
+first20_num <- first20$n
+first20_num
+```
+
+```{r, include=FALSE}
+options(tinytex.verbose = TRUE)
 ```
