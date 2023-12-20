@@ -1,0 +1,151 @@
+---
+title: "RWorksheet_DelaCruz#6"
+author: "Kyla Ysabelle De la Cruz"
+date: "2023-12-8"
+output: pdf_document
+---
+
+```{r 1. data frame}
+dataFrame <- data.frame(
+  Student = c(1:10),
+  Pre_Test = c(55,54,47,57,51,61,57,54,63,58),
+  Post_Test = c(61,60,56,63,56,63,59,56,62,61)
+)
+
+dataFrame
+```
+
+```{r 1.a}
+library(Hmisc)
+library(pastecs)
+
+#Descriptive statistics using Hmisc package
+desc_hmisc <- describe(dataFrame)
+desc_hmisc
+
+#Descriptive statistics using pastecs package
+desc_pastecs <- stat.desc(dataFrame)
+desc_pastecs
+```
+
+```{r 2.a}
+fertilizer_levels <- c(10, 10, 10, 20, 20, 50, 10, 20, 10, 50, 20, 50, 20, 10)
+fertilizer_levels
+
+ordered_fertilizer <- factor(fertilizer_levels, levels = c(10, 20, 50), ordered = TRUE)
+ordered_fertilizer
+```
+
+```{r 3.}
+exercise_levels <- c("l", "n", "n", "i", "l", "l", "n", "n", "i", "l")
+exercise_levels
+
+exercise_factor <- factor(exercise_levels, levels = c("n", "l", "i"), ordered = TRUE)
+exercise_factor
+```
+
+```{r 4.}
+state <- c("tas", "sa", "qld", "nsw", "nsw", "nt", "wa", "wa", "qld",
+           "vic", "nsw", "vic", "qld", "qld", "sa", "tas", "sa", "nt",
+           "wa", "vic", "qld", "nsw", "nsw", "wa", "sa", "act", "nsw",
+           "vic", "vic", "act")
+state
+
+state_levels <- c("act", "nsw", "nt", "qld", "sa", "tas", "vic", "wa")
+
+state_factor <- factor(state, levels = state_levels)
+state_factor
+```
+
+```{r 5.}
+incomes <- c(60, 49, 40, 61, 64, 60, 59, 54, 62, 69,
+             70, 42, 56, 61, 61, 61, 58, 51, 48, 65,
+             49, 49, 41, 48, 52, 46, 59, 46, 58, 43)
+
+state_levels <- c("act", "nsw", "nt", "qld", "sa", "tas", "vic", "wa")
+state_factor <- factor(state, levels = state_levels)
+
+inc_means <- tapply(incomes, state_factor, mean)
+inc_means
+```
+
+```{r 6.}
+stdError <- function(x) sqrt(var(x) / length(x))
+
+inc_ster <- tapply(incomes, state_factor, stdError)
+inc_ster
+```
+```{r titanic dataset}
+data(Titanic)
+View(Titanic)
+```
+
+```{r 7.a}
+library(titanic)
+
+data("titanic_train")
+titanic_df <- titanic_train
+
+survived_subset <- subset(titanic_df, Survived == 1)
+survived_subset
+
+not_survived_subset <- subset(titanic_df, Survived == 0)
+not_survived_subset
+```
+
+```{r 8.}
+BreastCancer <- read.csv("BreastCancer.csv")
+head(BreastCancer)
+
+#clump_thickness, size_uniformity, shape_uniformity, marginal_adhesion, epithelial_size, bare_nucleoli, #bland_chromatin, normal_nucleoli, mitoses: These variables represent different features or attributes of the breast #Ocancer cells. They seem to have values ranging from 1 to 10, indicating the level or extent of each characteristic.
+```
+
+```{r d}
+#d.1
+standard_error_clump_thickness <- sd(BreastCancer$clump_thickness) / sqrt(length(BreastCancer$clump_thickness))
+
+#d.2
+coefficient_of_variability_adhesion <- sd(BreastCancer$marginal_adhesion) / mean(BreastCancer$marginal_adhesion) * 100
+
+#d.3
+null_values_bare_nuclei <- sum(is.na(BreastCancer$bare_nucleoli))
+
+#d.4
+mean_bland_chromatin <- mean(BreastCancer$bland_chromatin)
+sd_bland_chromatin <- sd(BreastCancer$bland_chromatin)
+
+#d.5
+confidence_interval_uniformity_shape <- t.test(BreastCancer$shape_uniformity)$conf.int
+
+paste("d.1 Standard Error of the Mean for Clump Thickness:")
+paste(standard_error_clump_thickness)
+
+paste("d.2 Coefficient of Variability for Marginal Adhesion:")
+paste(coefficient_of_variability_adhesion)
+
+paste("d.3 Number of Null Values of Bare Nuclei:")
+print(null_values_bare_nuclei)
+
+paste("d.4 Mean and Standard Deviation for Bland Chromatin:")
+paste(paste("Mean:", mean_bland_chromatin))
+paste(paste("Standard Deviation:", sd_bland_chromatin))
+
+paste("d.5 Confidence Interval of the Mean for Uniformity of Cell Shape:", confidence_interval_uniformity_shape)
+```
+
+```{r d}
+num_attributes <- ncol(BreastCancer)
+paste("Number of attributes: ", num_attributes)
+
+percentage_malignant <- mean(BreastCancer$class == 4) * 100
+paste("Percentage of Respondents who are Malignant:", percentage_malignant)
+```
+
+```{r copied code}
+#install.packages("AppliedPredictiveModeling")
+library("AppliedPredictiveModeling")
+data("abalone")
+View(abalone)
+head(abalone)
+summary(abalone)
+```
